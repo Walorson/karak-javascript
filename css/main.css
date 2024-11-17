@@ -1,0 +1,30 @@
+:root {
+    --char-orientation: 0deg;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #090909;
+    height: 100vh;
+    overflow: hidden;
+}
+.map {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+#char {
+    position: absolute;
+    left: 820px;
+    top: 420px;
+    transform: translate(40%, 40%) rotateZ(var(--char-orientation));
+    z-index: 1;
+    transition: 0.2s ease-in-out;
+}
+#char img {
+    height: 64px;
+    width: 64px;
+}
