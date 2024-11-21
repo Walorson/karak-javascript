@@ -88,6 +88,11 @@ abstract class Tile {
     {
         document.getElementById("tile" + this.id).setAttribute("src", `img/tiles/${this.texture}.png`);
     }
+
+    rotate(deg: number): void 
+    {
+        this.html.style.transform = `rotate(${deg}deg)`;
+    }
 }
 class Room extends Tile {
     enemy: any;
@@ -114,7 +119,7 @@ class Tunnel extends Tile {
         else if(char.orientation == "up" || char.orientation == "down")
         {
             this.blockedOrientations = ["left", "right"];
-            this.html.style.transform = "rotate(90deg)";
+            this.rotate(90);
         }
         
     }
@@ -134,8 +139,63 @@ class tunnelTriple extends Tile {
         super();
         this.reloadTexture();
 
-        this.blockedOrientations = ["up"];
+        const rand: number = Math.floor(Math.random()*3);
+        if(char.orientation == "left")
+        {
+            switch(rand)
+            {
+                case 0: this.blockedOrientations = ["up"]; break;
+                case 1: this.rotateLeft(); break;
+                case 2: this.rotateDown(); break;
+            }
+        }
+        else if(char.orientation == "up")
+        {
+            switch(rand)
+            {
+                case 0: this.blockedOrientations = ["up"]; break;
+                case 1: this.rotateLeft(); break;
+                case 2: this.rotateRight(); break;
+            }
+        }
+        else if(char.orientation == "right")
+        {
+            switch(rand)
+            {
+                case 0: this.blockedOrientations = ["up"]; break;
+                case 1: this.rotateRight(); break;
+                case 2: this.rotateDown(); break;
+            }
+        }
+        else if(char.orientation == "down")
+        {
+            switch(rand)
+            {
+                case 0: this.rotateRight(); break;
+                case 1: this.rotateLeft(); break;
+                case 2: this.rotateDown(); break;
+            }
+        }
     }
+
+    rotateLeft(): void
+    {
+        this.blockedOrientations = ["left"];
+        this.rotate(270);
+    }
+
+    rotateRight(): void
+    {
+        this.blockedOrientations = ["right"];
+        this.rotate(90);
+    }
+
+    rotateDown(): void
+    {
+        this.blockedOrientations = ["down"];
+        this.rotate(180);
+    }
+    
 }
 
 new Depo();
