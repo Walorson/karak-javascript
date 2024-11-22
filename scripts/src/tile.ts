@@ -105,6 +105,11 @@ class Room extends Tile {
     enemy: any;
     constructor() {
         super();
+        this.summonEnemy(new Rat());
+    }
+
+    summonEnemy(enemy: Enemy) {
+        enemy.move(this.shiftX, this.shiftY);
     }
 }
 class Depo extends Tile {

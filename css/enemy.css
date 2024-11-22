@@ -1,0 +1,6 @@
+.enemy {
+    position: absolute;
+    width: 74px;
+    height: 74px;
+    transform: translate(35%, 35%);
+}
